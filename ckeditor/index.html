@@ -1,0 +1,48 @@
+<script src="ckeditor5/build/ckeditor.js"></script>
+<form action="" method="post">
+       <textarea name="" id="editor" class="ckEditor"></textarea>
+                <br>
+       <button type="submit" class="btn btn-primary float-right">Submit</button>       
+</form>   
+<script>
+ClassicEditor.create(document.querySelector( '#editor' ), {
+
+                fontFamily: {
+                    options: [
+                        'default',
+                        'Ubuntu, Arial, sans-serif',
+                        'Ubuntu Mono, Courier New, Courier, monospace'
+                    ]
+                },
+                toolbar: {
+                    items: ['heading', '|', 'imageUpload', 'bold', 'italic', 'underline', 'fontFamily', 'undo', 'redo',
+                    'fontSize', , 'fontFamily', 'fontColor', 'fontBackgroundColor', 'htmlEmbed', 'link', 'insertTable', 
+                    'mediaEmbed', 'bulletedList', 'numberedList', '|','MathType', 'blockQuote', 'specialCharacters'],
+                    shouldNotGroupWhenFull: true
+                },
+                image: {
+                    // You need to configure the image toolbar, too, so it uses the new style buttons.
+                    toolbar: ['imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:alignRight', 'imageStyle:alignCenter'],
+
+                    styles: [
+                        // This option is equal to a situation where no style is applied.
+                        'full',
+                        'side',
+                        'alignCenter',
+                        // This represents an image aligned to the left.
+                        'alignLeft',
+                        // This represents an image aligned to the right.
+                        'alignRight'
+                    ]
+                }
+            })
+            .then(editor => {
+                // This place loads the adapter.
+                editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                    return new UploadAdapter(loader);
+                };
+            })
+            .catch(error => {
+                console.error(error);
+            });
+</script>
